@@ -8,7 +8,7 @@
 | Name | Roll No. | Role |
 |---|---|---|
 | Rashi Kamboj | 2028027 | Team Lead / Backend & Integration |
-| XXXXXX XXXXXX | 2027732 | Developer / Core DS-Algorithm Engine (C++) |
+| Daksh Kandari | 2027732 | Developer / Core DS-Algorithm Engine (C++) |
 | Tanishka Joshi | 2029091 | Frontend & UI/UX |
 | Aakarsh Gupta | 2027501 | Database & Documentation |
 
