@@ -12,6 +12,9 @@ add_executable(medroute_engine
     src/Ambulance.cpp
     src/Hospital.cpp
     src/Emergency.cpp
+    src/Dijkstra.cpp
+    src/SeverityTable.cpp
+    src/Dispatcher.cpp
 )
 
 target_include_directories(medroute_engine PRIVATE src)

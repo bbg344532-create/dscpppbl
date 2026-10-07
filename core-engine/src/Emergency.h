@@ -7,7 +7,7 @@ class Emergency {
 private:
     int id;
     int locationId;         // node id where emergency was reported
-    int severity;           // lower = more critical
+    int severity;           // higher = more critical (matches SeverityTable / PriorityQueue convention)
     Specialization requiredSpecialization;
     long timestamp;
 

@@ -1,12 +1,14 @@
 #include "Hospital.h"
 #include <algorithm>
 
-Hospital::Hospital(int id, int locationId, int availableBeds)
-    : id(id), locationId(locationId), availableBeds(availableBeds) {}
+Hospital::Hospital(int id, int locationId, int totalBeds)
+    : id(id), locationId(locationId), totalBeds(totalBeds), availableBeds(totalBeds) {}
 
 int Hospital::getId() const { return id; }
 
 int Hospital::getLocationId() const { return locationId; }
+
+int Hospital::getTotalBeds() const { return totalBeds; }
 
 int Hospital::getAvailableBeds() const { return availableBeds; }
 
@@ -26,5 +28,7 @@ void Hospital::admitPatient() {
 }
 
 void Hospital::dischargePatient() {
-    availableBeds++;
+    if (availableBeds < totalBeds) {
+        availableBeds++;
+    }
 }

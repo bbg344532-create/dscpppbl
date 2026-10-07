@@ -12,20 +12,23 @@ private:
     int id;
     int locationId; // node id in the road-network graph
     std::vector<Specialization> specializations;
-    int availableBeds;
+    int totalBeds;     // fixed capacity
+    int availableBeds; // currently free; bounded between 0 and totalBeds
 
 public:
-    Hospital(int id, int locationId, int availableBeds);
+    // Hospital starts at full capacity (availableBeds == totalBeds).
+    Hospital(int id, int locationId, int totalBeds);
 
     int getId() const;
     int getLocationId() const;
+    int getTotalBeds() const;
     int getAvailableBeds() const;
 
     void addSpecialization(Specialization spec);
     bool canTreat(Specialization required) const;
 
-    void admitPatient();   // decreases available beds
-    void dischargePatient(); // increases available beds
+    void admitPatient();      // decreases available beds (floor at 0)
+    void dischargePatient();  // increases available beds (capped at totalBeds)
 };
 
 #endif // HOSPITAL_H

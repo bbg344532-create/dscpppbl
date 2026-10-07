@@ -12,8 +12,20 @@ void Graph::addEdge(int source, int destination, double weight, bool bidirection
 }
 
 void Graph::updateEdgeWeight(int source, int destination, double newWeight) {
-    // TODO: locate the edge (source -> destination) in adjacencyList and update its weight
-    // Used for simulating traffic/road-condition changes for dynamic re-routing
+    // Used to simulate traffic/road-condition changes for dynamic re-routing.
+    // Updates the edge source -> destination if it exists. If the graph was built
+    // bidirectionally, call this twice (once each direction) or extend as needed.
+    auto it = adjacencyList.find(source);
+    if (it == adjacencyList.end()) return;
+
+    for (auto& edge : it->second) {
+        if (edge.destination == destination) {
+            edge.weight = newWeight;
+            return;
+        }
+    }
+    // Edge didn't exist yet - add it so dynamic conditions can introduce new connections
+    adjacencyList[source].emplace_back(destination, newWeight);
 }
 
 std::vector<Edge> Graph::getNeighbors(int node) const {
