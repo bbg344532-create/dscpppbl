@@ -147,6 +147,15 @@ main {
   border-radius: 4px;
 }
 
+.queue-rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
 .queue-severity {
   font-family: var(--font-mono);
   font-weight: 600;
@@ -322,6 +331,119 @@ main {
   padding: 2px 6px;
 }
 
+/* ===== Report emergency form ===== */
+
+.report-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.field select {
+  background: var(--panel-raised);
+  border: 1px solid var(--hairline);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+.field select:focus-visible {
+  border-color: var(--accent);
+}
+
+.resolved-preview {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--panel-raised);
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #06201C;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 9px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-small {
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+/* ===== Dispatch action bar ===== */
+
+.dispatch-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 12px 16px;
+}
+
+.dispatch-action-hint {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ===== Dispatcher reasoning ===== */
+
+.reasoning-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-height: 160px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+
+.reasoning-line {
+  padding: 4px 8px;
+  border-radius: 3px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+.reasoning-skip {
+  color: var(--text-faint);
+}
+
+.reasoning-win {
+  color: var(--accent);
+  background: var(--accent-dim);
+  font-weight: 600;
+}
+
 /* ===== Map ===== */
 
 .map-panel {
@@ -340,6 +462,11 @@ main {
 .map-edge {
   stroke: var(--hairline);
   stroke-width: 1.5;
+}
+
+.map-edge-highlight {
+  stroke: var(--accent);
+  stroke-width: 3;
 }
 
 .map-node {
@@ -400,6 +527,13 @@ main {
   border: 2px solid var(--sev-urgent);
   border-radius: 50%;
   background: transparent;
+}
+
+.legend-route {
+  background: var(--accent);
+  height: 3px;
+  border-radius: 2px;
+  align-self: center;
 }
 
 /* ===== Dispatch log ===== */

@@ -7,7 +7,7 @@ function HospitalList({ hospitals }) {
       </div>
       <ul className="hospital-list">
         {hospitals.map((h) => {
-          const occupancy = 1 - h.beds / h.totalBeds;
+          const occupancy = 1 - h.availableBeds / h.totalBeds;
           // Color reflects how close the hospital is to capacity, same
           // logic the Dispatcher itself uses for load-balancing decisions.
           const fillColor =
@@ -18,7 +18,7 @@ function HospitalList({ hospitals }) {
             <li key={h.id} className="hospital-item">
               <div className="hospital-top-row">
                 <span className="hospital-name">{h.name}</span>
-                <span className="hospital-beds">{h.beds}/{h.totalBeds} beds</span>
+                <span className="hospital-beds">{h.availableBeds}/{h.totalBeds} beds</span>
               </div>
               <div className="hospital-bar-track" aria-hidden="true">
                 <div

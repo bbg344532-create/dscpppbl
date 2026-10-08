@@ -1,6 +1,6 @@
 import { statusColor } from '../data/mockData';
 
-function AmbulanceStatus({ ambulances }) {
+function AmbulanceStatus({ ambulances, onCompleteDispatch }) {
   const freeCount = ambulances.filter((a) => a.status === 'FREE').length;
 
   return (
@@ -16,6 +16,11 @@ function AmbulanceStatus({ ambulances }) {
             <span className="status-id">AMB-{a.id}</span>
             <span className="status-loc">loc {a.locationId}</span>
             <span className="status-tag" style={{ color: statusColor(a.status) }}>{a.status}</span>
+            {a.status === 'EN_ROUTE' && (
+              <button className="btn-ghost btn-small" onClick={() => onCompleteDispatch(a.id)}>
+                Complete
+              </button>
+            )}
           </li>
         ))}
       </ul>
