@@ -1,6 +1,7 @@
 #include "Dispatcher.h"
 #include "Dijkstra.h"
 #include <iostream>
+#include <sstream>
 #include <limits>
 
 Dispatcher::Dispatcher(Graph& roadNetwork)
@@ -94,8 +95,10 @@ bool Dispatcher::tryMatch(Ambulance* ambulance) {
     assignedHospitalLocationByAmbulance.insert(ambulance->getId(), bestHospital->getLocationId());
 
     long dispatchTime = simulatedClock++;
+    std::ostringstream timeText;
+    timeText << dispatchTime;
     dispatchHistory.append(DispatchRecord(bestEmergencyId, ambulance->getId(),
-                                           bestHospital->getId(), std::to_string(dispatchTime)));
+                                           bestHospital->getId(), timeText.str()));
 
     std::cout << "[DISPATCH] Emergency " << bestEmergencyId
               << " (severity " << bestEmergency->getSeverity() << ") -> Ambulance "
