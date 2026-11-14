@@ -13,6 +13,13 @@ struct EmergencyEntry {
 
     EmergencyEntry(int id, int sev, long ts)
         : emergencyId(id), severity(sev), waitTimeStamp(ts) {}
+
+    // Overloaded operator: "a > b" means a is MORE URGENT than b
+    // (higher severity, or equal severity and reported earlier).
+    bool operator>(const EmergencyEntry& other) const {
+        if (severity != other.severity) return severity > other.severity;
+        return waitTimeStamp < other.waitTimeStamp;
+    }
 };
 
 // Max-Heap based Priority Queue (by severity, earliest-timestamp tiebreak).

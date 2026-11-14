@@ -27,10 +27,7 @@ void LinkedList::append(const DispatchRecord& record) {
 void LinkedList::printAll() const {
     Node* current = head;
     while (current) {
-        std::cout << "  Emergency " << current->data.emergencyId
-                  << " -> Ambulance " << current->data.ambulanceId
-                  << " -> Hospital " << current->data.hospitalId
-                  << " @ t=" << current->data.timestamp << "\n";
+        std::cout << "  " << current->data << "\n";
         current = current->next;
     }
 }

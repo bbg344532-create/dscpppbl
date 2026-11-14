@@ -16,3 +16,8 @@ Specialization Emergency::getRequiredSpecialization() const {
 }
 
 long Emergency::getTimestamp() const { return timestamp; }
+
+std::ostream& operator<<(std::ostream& os, const Emergency& e) {
+    return os << "Emergency " << e.id << ": severity " << e.severity << ", needs "
+              << toString(e.requiredSpecialization) << ", at node " << e.locationId << ", reported t=" << e.timestamp;
+}

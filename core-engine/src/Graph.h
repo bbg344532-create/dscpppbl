@@ -4,36 +4,37 @@
 #include <vector>
 #include <unordered_map>
 
-// Represents a single road connection between two locations
+// One road leaving a node: where it goes and what it costs.
 struct Edge {
     int destination;
-    double weight; // distance or travel-time cost
+    double weight;
 
     Edge(int dest, double w) : destination(dest), weight(w) {}
 };
 
-// Graph class represents the road network as a weighted adjacency list.
-// Nodes = locations (hospitals, ambulance positions, emergency sites)
-// Edges = roads connecting them, weighted by distance/traffic cost
+// Road network as a weighted adjacency list.
+// Nodes = locations, edges = roads weighted by distance/travel cost.
 class Graph {
 private:
     std::unordered_map<int, std::vector<Edge>> adjacencyList;
-    int numNodes;
 
 public:
     Graph();
-    explicit Graph(int nodes);
+    explicit Graph(int expectedNodes); // size hint only; the graph grows as needed
 
-    // Add a bidirectional or directed road between two locations
+    // Adds a road (and the reverse road when bidirectional). Both end nodes
+    // become known to the graph, even if they have no outgoing roads.
     void addEdge(int source, int destination, double weight, bool bidirectional = true);
 
-    // Update weight of an existing edge (e.g., traffic congestion change)
+    // Changes the cost of the road source -> destination (e.g. traffic).
+    // Two-way roads need a call in each direction.
     void updateEdgeWeight(int source, int destination, double newWeight);
 
-    // Get all neighbors of a given node
     std::vector<Edge> getNeighbors(int node) const;
-
-    int getNumNodes() const;
+    bool hasNode(int node) const;
+    bool hasEdge(int source, int destination) const;       // is there a road source -> destination?
+    double getEdgeWeight(int source, int destination) const; // -1 if there is no such road
+    int getNumNodes() const; // number of distinct nodes the graph knows about
 };
 
 #endif // GRAPH_H

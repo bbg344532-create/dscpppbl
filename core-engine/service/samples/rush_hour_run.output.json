@@ -1,0 +1,373 @@
+{
+ "ok": true,
+ "action": "run",
+ "log": [
+  "[DISPATCH] Emergency 1 (severity 9) -> Ambulance 104 -> Hospital 4  | pickup dist=3, hospital dist=6",
+  "[DISPATCH] Emergency 2 (severity 8) -> Ambulance 102 -> Hospital 1  | pickup dist=10, hospital dist=4",
+  "[DISPATCH] Emergency 3 (severity 8) -> Ambulance 106 -> Hospital 5  | pickup dist=15, hospital dist=4",
+  "[DISPATCH] Emergency 5 (severity 7) -> Ambulance 103 -> Hospital 3  | pickup dist=15, hospital dist=3",
+  "[DISPATCH] Emergency 6 (severity 6) -> Ambulance 101 -> Hospital 3  | pickup dist=7, hospital dist=7",
+  "[DISPATCH] Emergency 4 (severity 7) -> Ambulance 105 -> Hospital 1  | pickup dist=34, hospital dist=20"
+ ],
+ "trace": [
+  "AMB-101 / EMG-1: severity 9, distance 16, score 74",
+  "AMB-101 / EMG-2: severity 8, distance 18, score 62",
+  "AMB-101 / EMG-3: severity 8, distance 23, score 57",
+  "AMB-101 / EMG-4: severity 7, distance 34, score 36",
+  "AMB-101 / EMG-5: severity 7, distance 17, score 53",
+  "AMB-102 / EMG-1: severity 9, distance 16, score 74",
+  "AMB-102 / EMG-2: severity 8, distance 10, score 70",
+  "AMB-102 / EMG-3: severity 8, distance 15, score 65",
+  "AMB-102 / EMG-4: severity 7, distance 19, score 51",
+  "AMB-102 / EMG-5: severity 7, distance 23, score 47",
+  "AMB-103 / EMG-1: severity 9, distance 11, score 79",
+  "AMB-103 / EMG-2: severity 8, distance 16, score 64",
+  "AMB-103 / EMG-3: severity 8, distance 21, score 59",
+  "AMB-103 / EMG-4: severity 7, distance 32, score 38",
+  "AMB-103 / EMG-5: severity 7, distance 15, score 55",
+  "AMB-104 / EMG-1: severity 9, distance 3, score 87",
+  "AMB-104 / EMG-2: severity 8, distance 9, score 71",
+  "AMB-104 / EMG-3: severity 8, distance 14, score 66",
+  "AMB-104 / EMG-4: severity 7, distance 24, score 46",
+  "AMB-104 / EMG-5: severity 7, distance 14, score 56",
+  "AMB-105 / EMG-1: severity 9, distance 16, score 74",
+  "AMB-105 / EMG-2: severity 8, distance 18, score 62",
+  "AMB-105 / EMG-3: severity 8, distance 23, score 57",
+  "AMB-105 / EMG-4: severity 7, distance 34, score 36",
+  "AMB-105 / EMG-5: severity 7, distance 17, score 53",
+  "AMB-106 / EMG-1: severity 9, distance 16, score 74",
+  "AMB-106 / EMG-2: severity 8, distance 10, score 70",
+  "AMB-106 / EMG-3: severity 8, distance 15, score 65",
+  "AMB-106 / EMG-4: severity 7, distance 19, score 51",
+  "AMB-106 / EMG-5: severity 7, distance 23, score 47",
+  "=> AMB-104 takes EMG-1, hospital 4 (score 87)",
+  "AMB-101 / EMG-6: severity 6, distance 7, score 53",
+  "AMB-102 / EMG-6: severity 6, distance 21, score 39",
+  "AMB-103 / EMG-6: severity 6, distance 11, score 49",
+  "AMB-105 / EMG-6: severity 6, distance 7, score 53",
+  "AMB-106 / EMG-6: severity 6, distance 21, score 39",
+  "=> AMB-102 takes EMG-2, hospital 1 (score 70)",
+  "AMB-101 / EMG-7: severity 6, distance 29, score 31",
+  "AMB-103 / EMG-7: severity 6, distance 27, score 33",
+  "AMB-105 / EMG-7: severity 6, distance 29, score 31",
+  "AMB-106 / EMG-7: severity 6, distance 7, score 53",
+  "=> AMB-106 takes EMG-3, hospital 5 (score 65)",
+  "AMB-101 / EMG-8: severity 4, distance 31, score 9",
+  "AMB-103 / EMG-8: severity 4, distance 29, score 11",
+  "AMB-105 / EMG-8: severity 4, distance 31, score 9",
+  "=> AMB-103 takes EMG-5, hospital 3 (score 55)",
+  "=> AMB-101 takes EMG-6, hospital 3 (score 53)",
+  "=> AMB-105 takes EMG-4, hospital 1 (score 36)"
+ ],
+ "dispatches": [
+  {
+   "ambulanceId": 104,
+   "emergencyId": 1,
+   "patientNode": 21,
+   "hospitalId": 4,
+   "pickupDistance": 3,
+   "hospitalDistance": 6,
+   "cost": 9,
+   "route": [
+    27,
+    21,
+    22
+   ]
+  },
+  {
+   "ambulanceId": 102,
+   "emergencyId": 2,
+   "patientNode": 16,
+   "hospitalId": 1,
+   "pickupDistance": 10,
+   "hospitalDistance": 4,
+   "cost": 14,
+   "route": [
+    12,
+    18,
+    17,
+    16,
+    15
+   ]
+  },
+  {
+   "ambulanceId": 106,
+   "emergencyId": 3,
+   "patientNode": 4,
+   "hospitalId": 5,
+   "pickupDistance": 15,
+   "hospitalDistance": 4,
+   "cost": 19,
+   "route": [
+    12,
+    18,
+    11,
+    4,
+    3
+   ]
+  },
+  {
+   "ambulanceId": 103,
+   "emergencyId": 5,
+   "patientNode": 2,
+   "hospitalId": 3,
+   "pickupDistance": 15,
+   "hospitalDistance": 3,
+   "cost": 18,
+   "route": [
+    19,
+    20,
+    14,
+    8,
+    2,
+    8
+   ]
+  },
+  {
+   "ambulanceId": 101,
+   "emergencyId": 6,
+   "patientNode": 13,
+   "hospitalId": 3,
+   "pickupDistance": 7,
+   "hospitalDistance": 7,
+   "cost": 14,
+   "route": [
+    1,
+    7,
+    13,
+    14,
+    8
+   ]
+  },
+  {
+   "ambulanceId": 105,
+   "emergencyId": 4,
+   "patientNode": 28,
+   "hospitalId": 1,
+   "pickupDistance": 34,
+   "hospitalDistance": 20,
+   "cost": 54,
+   "route": [
+    1,
+    7,
+    13,
+    14,
+    15,
+    16,
+    23,
+    29,
+    28,
+    29,
+    23,
+    16,
+    15
+   ]
+  }
+ ],
+ "completed": [],
+ "reroutes": [],
+ "roadChanges": [],
+ "ambulances": [
+  {
+   "id": 101,
+   "node": 1,
+   "status": "EN_ROUTE"
+  },
+  {
+   "id": 102,
+   "node": 12,
+   "status": "EN_ROUTE"
+  },
+  {
+   "id": 103,
+   "node": 19,
+   "status": "EN_ROUTE"
+  },
+  {
+   "id": 104,
+   "node": 27,
+   "status": "EN_ROUTE"
+  },
+  {
+   "id": 105,
+   "node": 1,
+   "status": "EN_ROUTE"
+  },
+  {
+   "id": 106,
+   "node": 12,
+   "status": "EN_ROUTE"
+  },
+  {
+   "id": 107,
+   "node": 14,
+   "status": "EN_ROUTE"
+  },
+  {
+   "id": 108,
+   "node": 23,
+   "status": "EN_ROUTE"
+  },
+  {
+   "id": 109,
+   "node": 9,
+   "status": "OCCUPIED"
+  }
+ ],
+ "hospitals": [
+  {
+   "id": 1,
+   "totalBeds": 40,
+   "availableBeds": 24
+  },
+  {
+   "id": 2,
+   "totalBeds": 20,
+   "availableBeds": 11
+  },
+  {
+   "id": 3,
+   "totalBeds": 24,
+   "availableBeds": 13
+  },
+  {
+   "id": 4,
+   "totalBeds": 16,
+   "availableBeds": 5
+  },
+  {
+   "id": 5,
+   "totalBeds": 30,
+   "availableBeds": 21
+  },
+  {
+   "id": 6,
+   "totalBeds": 22,
+   "availableBeds": 12
+  },
+  {
+   "id": 7,
+   "totalBeds": 18,
+   "availableBeds": 4
+  },
+  {
+   "id": 8,
+   "totalBeds": 10,
+   "availableBeds": 3
+  },
+  {
+   "id": 9,
+   "totalBeds": 28,
+   "availableBeds": 17
+  }
+ ],
+ "pending": [
+  7,
+  8
+ ],
+ "trips": [
+  {
+   "ambulanceId": 104,
+   "emergencyId": 1,
+   "patientNode": 21,
+   "hospitalId": 4,
+   "pickupDistance": 3,
+   "hospitalDistance": 6,
+   "cost": 9,
+   "route": [
+    27,
+    21,
+    22
+   ]
+  },
+  {
+   "ambulanceId": 102,
+   "emergencyId": 2,
+   "patientNode": 16,
+   "hospitalId": 1,
+   "pickupDistance": 10,
+   "hospitalDistance": 4,
+   "cost": 14,
+   "route": [
+    12,
+    18,
+    17,
+    16,
+    15
+   ]
+  },
+  {
+   "ambulanceId": 106,
+   "emergencyId": 3,
+   "patientNode": 4,
+   "hospitalId": 5,
+   "pickupDistance": 15,
+   "hospitalDistance": 4,
+   "cost": 19,
+   "route": [
+    12,
+    18,
+    11,
+    4,
+    3
+   ]
+  },
+  {
+   "ambulanceId": 103,
+   "emergencyId": 5,
+   "patientNode": 2,
+   "hospitalId": 3,
+   "pickupDistance": 15,
+   "hospitalDistance": 3,
+   "cost": 18,
+   "route": [
+    19,
+    20,
+    14,
+    8,
+    2,
+    8
+   ]
+  },
+  {
+   "ambulanceId": 101,
+   "emergencyId": 6,
+   "patientNode": 13,
+   "hospitalId": 3,
+   "pickupDistance": 7,
+   "hospitalDistance": 7,
+   "cost": 14,
+   "route": [
+    1,
+    7,
+    13,
+    14,
+    8
+   ]
+  },
+  {
+   "ambulanceId": 105,
+   "emergencyId": 4,
+   "patientNode": 28,
+   "hospitalId": 1,
+   "pickupDistance": 34,
+   "hospitalDistance": 20,
+   "cost": 54,
+   "route": [
+    1,
+    7,
+    13,
+    14,
+    15,
+    16,
+    23,
+    29,
+    28,
+    29,
+    23,
+    16,
+    15
+   ]
+  }
+ ]
+}

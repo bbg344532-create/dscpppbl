@@ -1,14 +1,11 @@
 #include "PriorityQueue.h"
-#include <stdexcept>
+#include "Exceptions.h"
 #include <algorithm>
 
 PriorityQueue::PriorityQueue() {}
 
 bool PriorityQueue::hasHigherPriority(int a, int b) const {
-    if (heap[a].severity != heap[b].severity) {
-        return heap[a].severity > heap[b].severity;   // higher severity wins
-    }
-    return heap[a].waitTimeStamp < heap[b].waitTimeStamp; // earlier timestamp wins on tie
+    return heap[a] > heap[b];   // uses EmergencyEntry::operator>
 }
 
 void PriorityQueue::heapifyUp(int index) {
@@ -70,7 +67,7 @@ void PriorityQueue::push(const EmergencyEntry& entry) {
 
 EmergencyEntry PriorityQueue::pop() {
     if (heap.empty()) {
-        throw std::runtime_error("PriorityQueue is empty - no emergencies pending");
+        throw EmptyQueueError();
     }
     EmergencyEntry top = heap.front();
     removeAt(0);
@@ -79,7 +76,7 @@ EmergencyEntry PriorityQueue::pop() {
 
 EmergencyEntry PriorityQueue::peek() const {
     if (heap.empty()) {
-        throw std::runtime_error("PriorityQueue is empty");
+        throw EmptyQueueError("PriorityQueue is empty");
     }
     return heap.front();
 }
@@ -94,10 +91,7 @@ int PriorityQueue::size() const {
 
 std::vector<EmergencyEntry> PriorityQueue::peekTopK(int k) const {
     std::vector<EmergencyEntry> copy(heap);
-    std::sort(copy.begin(), copy.end(), [this](const EmergencyEntry& x, const EmergencyEntry& y) {
-        if (x.severity != y.severity) return x.severity > y.severity;
-        return x.waitTimeStamp < y.waitTimeStamp;
-    });
+    std::sort(copy.begin(), copy.end(), [](const EmergencyEntry& x, const EmergencyEntry& y) { return x > y; });
     if (k < static_cast<int>(copy.size())) {
         copy.erase(copy.begin() + k, copy.end()); // trim to top-k without needing a default ctor
     }

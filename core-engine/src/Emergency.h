@@ -12,6 +12,8 @@ private:
     long timestamp;
 
 public:
+    friend std::ostream& operator<<(std::ostream& os, const Emergency& e);
+
     Emergency(int id, int locationId, int severity,
               Specialization requiredSpec, long timestamp);
 

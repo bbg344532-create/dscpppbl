@@ -32,3 +32,9 @@ void Hospital::dischargePatient() {
         availableBeds++;
     }
 }
+
+std::ostream& operator<<(std::ostream& os, const Hospital& h) {
+    os << "Hospital " << h.id << " at node " << h.locationId << ": beds " << h.availableBeds << "/" << h.totalBeds << ", treats ";
+    for (std::size_t i = 0; i < h.specializations.size(); ++i) os << (i ? ", " : "") << toString(h.specializations[i]);
+    return os;
+}

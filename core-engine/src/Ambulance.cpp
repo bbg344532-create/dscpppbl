@@ -14,3 +14,7 @@ void Ambulance::setLocation(int locationId) { currentLocationId = locationId; }
 void Ambulance::setStatus(AmbulanceStatus newStatus) { status = newStatus; }
 
 bool Ambulance::isAvailable() const { return status == AmbulanceStatus::FREE; }
+
+std::ostream& operator<<(std::ostream& os, const Ambulance& a) {
+    return os << "Ambulance " << a.id << " [" << toString(a.status) << "] at node " << a.currentLocationId;
+}

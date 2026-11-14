@@ -2,6 +2,7 @@
 #define LINKED_LIST_H
 
 #include <string>
+#include <ostream>
 
 // A single dispatch record: which ambulance went to which hospital, and when
 struct DispatchRecord {
@@ -13,6 +14,11 @@ struct DispatchRecord {
     DispatchRecord(int eId, int aId, int hId, const std::string& ts)
         : emergencyId(eId), ambulanceId(aId), hospitalId(hId), timestamp(ts) {}
 };
+
+inline std::ostream& operator<<(std::ostream& os, const DispatchRecord& r) {
+    return os << "Emergency " << r.emergencyId << " -> Ambulance " << r.ambulanceId
+              << " -> Hospital " << r.hospitalId << " @ t=" << r.timestamp;
+}
 
 struct Node {
     DispatchRecord data;

@@ -3,6 +3,8 @@
 #include "Dispatcher.h"
 #include "Ambulance.h"
 #include "Hospital.h"
+#include "HopCountPlanner.h"
+#include "Exceptions.h"
 
 // Demo scenario: a small road network, a few hospitals, a few ambulances,
 // and a handful of emergencies arriving over time - including the exact
@@ -198,6 +200,160 @@ int main() {
 
         delete genHospital;
         delete a3;
+    }
+
+    // =====================================================================
+    // SCENARIO 4: OOP features (Phase-III)
+    // Polymorphism through a RoutePlanner base class, operator overloading,
+    // friend functions, and the custom exception hierarchy.
+    // =====================================================================
+    std::cout << "\n=========================================\n";
+    std::cout << " SCENARIO 4: OOP Features\n";
+    std::cout << "=========================================\n";
+    {
+        // Road 1-4 is one long road (weight 5); 1-2-3-4 is three short roads (total 3).
+        Graph g4;
+        g4.addEdge(1, 2, 1);
+        g4.addEdge(2, 3, 1);
+        g4.addEdge(3, 4, 1);
+        g4.addEdge(1, 4, 5);
+
+        // (a) Polymorphism: one base-class pointer type, two different algorithms.
+        DijkstraPlanner dijkstraPlanner;
+        HopCountPlanner hopPlanner;
+        const RoutePlanner* planners[2] = { &dijkstraPlanner, &hopPlanner };
+        std::cout << "(a) Same call, node 1 to node 4, through a RoutePlanner pointer:\n";
+        for (int i = 0; i < 2; ++i) {
+            PathResult r = planners[i]->path(g4, 1, 4);
+            std::cout << "  " << planners[i]->name() << ": cost " << r.totalDistance << ", route";
+            for (std::size_t k = 0; k < r.path.size(); ++k) std::cout << (k > 0 ? " -> " : " ") << r.path[k];
+            std::cout << "\n";
+        }
+
+        // (b) The same emergency handled by two Dispatchers that use different planners.
+        Hospital hospD(30, 4, 5), hospH(31, 4, 5);
+        hospD.addSpecialization(Specialization::GENERAL);
+        hospH.addSpecialization(Specialization::GENERAL);
+        Ambulance ambD(401, 1), ambH(402, 1);
+        Dispatcher withDijkstra(g4);           // default planner (Dijkstra)
+        Dispatcher withHops(g4, &hopPlanner);  // planner injected from outside
+        withDijkstra.addHospital(&hospD);
+        withDijkstra.addAmbulance(&ambD);
+        withHops.addHospital(&hospH);
+        withHops.addAmbulance(&ambH);
+        std::cout << "\n(b) One emergency, two Dispatchers: " << withDijkstra.getRoutePlanner().name()
+                  << "  vs  " << withHops.getRoutePlanner().name() << "\n";
+        withDijkstra.reportEmergency(601, 4, "Fracture", Specialization::GENERAL);
+        withHops.reportEmergency(601, 4, "Fracture", Specialization::GENERAL);
+
+        // (c) Overloaded operators and friend functions.
+        std::cout << "\n(c) operator<< (friend functions) and operator> on EmergencyEntry:\n";
+        Emergency sample(1, 4, 9, Specialization::CARDIAC, 0);
+        std::cout << "  " << ambD << "\n  " << hospD << "\n  " << sample << "\n";
+        EmergencyEntry urgent(1, 9, 5), minor(2, 4, 1);
+        std::cout << "  severity 9 outranks severity 4 (urgent > minor)? " << ((urgent > minor) ? "yes" : "no") << "\n";
+
+        // (d) Exception hierarchy: MedRouteError -> std::runtime_error.
+        std::cout << "\n(d) Exceptions:\n";
+        try { withDijkstra.reportEmergency(602, 99, "Fracture", Specialization::GENERAL); }
+        catch (const UnknownLocationError& e) { std::cout << "  caught UnknownLocationError: " << e.what() << "\n"; }
+        try { withDijkstra.addAmbulance(&ambD); }
+        catch (const MedRouteError& e) { std::cout << "  caught through base class MedRouteError: " << e.what() << "\n"; }
+        try { PriorityQueue emptyQueue; emptyQueue.pop(); }
+        catch (const std::runtime_error& e) { std::cout << "  caught through std::runtime_error: " << e.what() << "\n"; }
+    }
+
+    // =====================================================================
+    // SCENARIO 5: Traffic events (Phase-III)
+    // A jammed road changes which ambulance is sent, and re-plans trips
+    // that are already under way.
+    // =====================================================================
+    std::cout << "\n=========================================\n";
+    std::cout << " SCENARIO 5: Traffic Events\n";
+    std::cout << "=========================================\n";
+    {
+        // Two ways to reach node 3. An ambulance at node 1 normally needs 2; one at node 5 needs 4.
+        Graph clear;
+        clear.addEdge(1, 2, 1);
+        clear.addEdge(2, 3, 1);
+        clear.addEdge(5, 4, 2);
+        clear.addEdge(4, 3, 2);
+        clear.addEdge(1, 4, 6);
+        Graph jammed = clear;   // an identical copy
+
+        Hospital hospClear(70, 3, 5), hospJam(71, 3, 5);
+        hospClear.addSpecialization(Specialization::GENERAL);
+        hospJam.addSpecialization(Specialization::GENERAL);
+        Ambulance aClear(701, 1), bClear(702, 5), aJam(711, 1), bJam(712, 5);
+        Dispatcher onClearRoads(clear), onJammedRoads(jammed);
+        onClearRoads.addHospital(&hospClear);
+        onClearRoads.addAmbulance(&aClear);
+        onClearRoads.addAmbulance(&bClear);
+        onJammedRoads.addHospital(&hospJam);
+        onJammedRoads.addAmbulance(&aJam);
+        onJammedRoads.addAmbulance(&bJam);
+
+        std::cout << "(a) The same emergency at node 3, with ambulances waiting at nodes 1 and 5.\n";
+        std::cout << "Clear roads:\n";
+        onClearRoads.reportEmergency(801, 3, "Fracture", Specialization::GENERAL);
+        std::cout << "Road 2-3 jammed first:\n";
+        onJammedRoads.applyTrafficEvent(2, 3, 20);
+        onJammedRoads.reportEmergency(801, 3, "Fracture", Specialization::GENERAL);
+
+        // (b) A trip already under way is re-planned when a road jams, and again when it clears.
+        Graph tripGraph = clear;
+        Hospital hosp(72, 5, 5);
+        hosp.addSpecialization(Specialization::GENERAL);
+        Ambulance amb(721, 1);
+        Dispatcher trip(tripGraph);
+        trip.addHospital(&hosp);
+        trip.addAmbulance(&amb);
+        std::cout << "\n(b) An ambulance is already on its way when road 2-3 jams, then clears:\n";
+        trip.reportEmergency(803, 3, "Fracture", Specialization::GENERAL);
+        trip.applyTrafficEvent(2, 3, 20);
+        trip.applyTrafficEvent(2, 3, 1);
+    }
+
+    // =====================================================================
+    // SCENARIO 6: Bed discharge (Phase-III)
+    // A full hospital blocks an emergency until a bed is freed.
+    // =====================================================================
+    std::cout << "\n=========================================\n";
+    std::cout << " SCENARIO 6: Bed Discharge\n";
+    std::cout << "=========================================\n";
+    {
+        Graph g6;
+        g6.addEdge(1, 2, 1);
+
+        Hospital oneBed(80, 2, 1), timedBed(81, 2, 1);
+        oneBed.addSpecialization(Specialization::GENERAL);
+        timedBed.addSpecialization(Specialization::GENERAL);
+        Ambulance a1(801, 1), a2(802, 1), a3(803, 1), a4(804, 1);
+        Dispatcher manual(g6), timed(g6);
+        manual.addHospital(&oneBed);
+        manual.addAmbulance(&a1);
+        manual.addAmbulance(&a2);
+        timed.addHospital(&timedBed);
+        timed.addAmbulance(&a3);
+        timed.addAmbulance(&a4);
+
+        std::cout << "(a) A one-bed hospital and two free ambulances. The second emergency has to wait:\n";
+        manual.reportEmergency(901, 1, "Fracture", Specialization::GENERAL);
+        manual.reportEmergency(902, 1, "Minor Injury", Specialization::GENERAL);
+        std::cout << "    Waiting emergencies: " << manual.pendingCount() << "\n";
+        std::cout << "    A patient is discharged:\n";
+        manual.dischargePatient(80);
+        std::cout << "    Waiting emergencies: " << manual.pendingCount() << "\n";
+
+        std::cout << "\n(b) Same situation, but patients stay 5 time units and time moves on by itself:\n";
+        timed.setStayDuration(5);
+        timed.reportEmergency(901, 1, "Fracture", Specialization::GENERAL);
+        timed.reportEmergency(902, 1, "Minor Injury", Specialization::GENERAL);
+        std::cout << "    Waiting emergencies: " << timed.pendingCount() << "\n";
+        timed.advanceTime(2);
+        std::cout << "    Waiting emergencies: " << timed.pendingCount() << " (stay not over yet)\n";
+        timed.advanceTime(5);
+        std::cout << "    Waiting emergencies: " << timed.pendingCount() << "\n";
     }
 
     return 0;

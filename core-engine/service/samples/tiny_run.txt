@@ -1,0 +1,10 @@
+# A tiny city: nodes 1 - 2 - 3, one hospital at node 3, two free ambulances, one waiting emergency.
+TYPE 9 CARDIAC Cardiac Arrest
+TYPE 4 GENERAL Fracture
+ROAD 1 2 1
+ROAD 2 3 2
+HOSPITAL 1 3 10 6 GENERAL,CARDIAC
+AMBULANCE 101 1 FREE
+AMBULANCE 102 3 FREE
+EMERGENCY 1 2 1 Fracture
+ACTION run
