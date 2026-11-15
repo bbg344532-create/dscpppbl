@@ -1,16 +1,45 @@
-# React + Vite
+# MedRoute frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+The operator dashboard (React + Vite). It holds no data and makes no decisions: it reads everything from the
+backend and sends the operator's actions to it. Every dispatch decision is made by the C++ engine behind the backend.
 
-Currently, two official plugins are available:
+## Run (needs Node.js 18 or newer)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Start the backend first (see `../backend/README.md`), then:
 
-## React Compiler
+```
+npm install
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Open the address it prints (usually http://localhost:5173).
 
-## Expanding the Oxlint configuration
+The backend address defaults to `http://localhost:5000`. To change it, copy `.env.example` to `.env` and edit
+`VITE_API_URL`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## What you can do
+
+| Panel | Action |
+|---|---|
+| Report emergency | Pick a node and an emergency type (severity and needed specialization fill in from the database), then Add to queue |
+| Run dispatch cycle | The engine matches free ambulances to waiting emergencies; the reasoning panel shows its scores and skipped cases |
+| Ambulances | Complete a trip: the ambulance is freed at the hospital and waiting emergencies are matched again |
+| Hospitals | Discharge one patient (frees a bed) |
+| Traffic | Pick a road (or click one on the map), set a new cost, Apply. Trips under way are re-planned. Clear removes a jam |
+| Demo scenarios | Load a ready-made situation, or reset all data |
+
+The map is drawn from the database: rings with a plus are hospitals, squares are ambulances, circles are waiting
+emergencies, diamonds are ambulance depots, orange roads are jammed, the thick teal line is the latest dispatch route.
+
+If the backend is not running the page says so and offers a retry; if it stops while the page is open, the last data stays
+on screen with a warning.
+
+## Optional browser test
+
+`e2e/e2e.cjs` drives the real page in a headless browser against a real backend (it starts the backend itself). It needs
+the engine program built and Playwright installed (`npm install --no-save playwright`, then `npx playwright install chromium`):
+
+```
+npm run build
+MEDROUTE_ENGINE_PATH=../core-engine/medroute_service node e2e/e2e.cjs
+```

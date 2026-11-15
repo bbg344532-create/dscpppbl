@@ -1,56 +1,44 @@
 import { useState } from 'react';
-import { nodePositions } from '../engine/graph';
-import { EMERGENCY_TYPES, lookupType } from '../engine/severityTable';
-import { severityBand } from '../data/mockData';
+import { severityBand } from '../format';
 
-const locationIds = Object.keys(nodePositions).map(Number);
-
-// Structured intake, not free text: the operator picks a location and a
-// TYPE, and severity + required specialization are resolved automatically
-// from SeverityTable — same design as Dispatcher::reportEmergency in the
-// core engine, which never accepts a raw severity number from the caller.
-function ReportEmergencyForm({ onReport }) {
-  const [locationId, setLocationId] = useState(locationIds[0]);
-  const [type, setType] = useState(EMERGENCY_TYPES[0].type);
-
-  const resolved = lookupType(type);
-  const band = severityBand(resolved.severity);
+// Structured intake: pick where and what. Severity and required specialization come from the
+// emergency type table in the database, never from typed text.
+function ReportEmergencyForm({ nodes, emergencyTypes, busy, onReport }) {
+  const [node, setNode] = useState('');
+  const [type, setType] = useState('');
+  const nodeValue = node || String(nodes.length ? nodes[0].id : '');
+  const typeValue = type || (emergencyTypes.length ? emergencyTypes[0].type : '');
+  const resolved = emergencyTypes.find((t) => t.type === typeValue);
+  const band = resolved ? severityBand(resolved.severity) : null;
 
   function handleSubmit(e) {
     e.preventDefault();
-    onReport({ locationId: Number(locationId), type });
+    onReport(Number(nodeValue), typeValue);
   }
 
   return (
     <section className="panel report-panel" aria-labelledby="report-heading">
-      <div className="panel-header">
-        <h2 id="report-heading">Report emergency</h2>
-      </div>
+      <div className="panel-header"><h2 id="report-heading">Report emergency</h2></div>
       <form className="report-form" onSubmit={handleSubmit}>
         <label className="field">
-          <span className="field-label">Location (node)</span>
-          <select value={locationId} onChange={(e) => setLocationId(e.target.value)}>
-            {locationIds.map((id) => (
-              <option key={id} value={id}>Node {id}</option>
-            ))}
+          <span className="field-label">Location</span>
+          <select aria-label="Location" value={nodeValue} onChange={(e) => setNode(e.target.value)}>
+            {nodes.map((n) => <option key={n.id} value={n.id}>Node {n.id} · {n.name}</option>)}
           </select>
         </label>
-
         <label className="field">
           <span className="field-label">Emergency type</span>
-          <select value={type} onChange={(e) => setType(e.target.value)}>
-            {EMERGENCY_TYPES.map((t) => (
-              <option key={t.type} value={t.type}>{t.type}</option>
-            ))}
+          <select aria-label="Emergency type" value={typeValue} onChange={(e) => setType(e.target.value)}>
+            {emergencyTypes.map((t) => <option key={t.type} value={t.type}>{t.type}</option>)}
           </select>
         </label>
-
-        <div className="resolved-preview">
-          <span>severity <strong style={{ color: band.color }}>{resolved.severity}</strong> ({band.label})</span>
-          <span>needs <strong>{resolved.requiredSpecialization}</strong></span>
-        </div>
-
-        <button type="submit" className="btn-primary">Add to queue</button>
+        {resolved && (
+          <div className="resolved-preview">
+            <span>severity <strong style={{ color: band.color }}>{resolved.severity}</strong> ({band.label})</span>
+            <span>needs <strong>{resolved.requiredSpecialization}</strong></span>
+          </div>
+        )}
+        <button type="submit" className="btn-primary" disabled={busy}>Add to queue</button>
       </form>
     </section>
   );

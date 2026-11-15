@@ -1,4 +1,5 @@
 import Dashboard from './components/Dashboard';
+import ConnectionStatus from './components/ConnectionStatus';
 import './styles/tokens.css';
 import './styles/App.css';
 
@@ -13,12 +14,8 @@ function App() {
             <p className="app-subtitle">Emergency Hospital Routing &amp; Resource Optimization</p>
           </div>
         </div>
-        <div className="app-status">
-          <span className="live-dot" aria-hidden="true" />
-          Simulated data — not yet connected to backend
-        </div>
+        <ConnectionStatus />
       </header>
-
       <main>
         <Dashboard />
       </main>
