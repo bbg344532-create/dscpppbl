@@ -1,0 +1,979 @@
+{
+ "nodes": [
+  {
+   "id": 1,
+   "name": "Northgate Junction",
+   "x": 75,
+   "y": 82,
+   "type": "DEPOT"
+  },
+  {
+   "id": 2,
+   "name": "Harbour View",
+   "x": 245,
+   "y": 94,
+   "type": "AREA"
+  },
+  {
+   "id": 3,
+   "name": "Northside Cross",
+   "x": 399,
+   "y": 68,
+   "type": "HOSPITAL"
+  },
+  {
+   "id": 4,
+   "name": "Old Town Square",
+   "x": 517,
+   "y": 97,
+   "type": "AREA"
+  },
+  {
+   "id": 5,
+   "name": "Station Road",
+   "x": 674,
+   "y": 98,
+   "type": "AREA"
+  },
+  {
+   "id": 6,
+   "name": "Lakeview Point",
+   "x": 828,
+   "y": 93,
+   "type": "HOSPITAL"
+  },
+  {
+   "id": 7,
+   "name": "West End",
+   "x": 105,
+   "y": 190,
+   "type": "AREA"
+  },
+  {
+   "id": 8,
+   "name": "Maple Street",
+   "x": 228,
+   "y": 162,
+   "type": "HOSPITAL"
+  },
+  {
+   "id": 9,
+   "name": "Clock Tower",
+   "x": 397,
+   "y": 167,
+   "type": "AREA"
+  },
+  {
+   "id": 10,
+   "name": "Metro Plaza",
+   "x": 510,
+   "y": 180,
+   "type": "HOSPITAL"
+  },
+  {
+   "id": 11,
+   "name": "Market Circle",
+   "x": 654,
+   "y": 190,
+   "type": "AREA"
+  },
+  {
+   "id": 12,
+   "name": "East Depot Road",
+   "x": 793,
+   "y": 193,
+   "type": "DEPOT"
+  },
+  {
+   "id": 13,
+   "name": "Park Lane",
+   "x": 111,
+   "y": 282,
+   "type": "AREA"
+  },
+  {
+   "id": 14,
+   "name": "College Corner",
+   "x": 226,
+   "y": 287,
+   "type": "AREA"
+  },
+  {
+   "id": 15,
+   "name": "Central Junction",
+   "x": 374,
+   "y": 284,
+   "type": "HOSPITAL"
+  },
+  {
+   "id": 16,
+   "name": "Library Crossing",
+   "x": 525,
+   "y": 286,
+   "type": "AREA"
+  },
+  {
+   "id": 17,
+   "name": "Orchard Road",
+   "x": 680,
+   "y": 266,
+   "type": "AREA"
+  },
+  {
+   "id": 18,
+   "name": "Eastgate",
+   "x": 814,
+   "y": 267,
+   "type": "HOSPITAL"
+  },
+  {
+   "id": 19,
+   "name": "West Depot Road",
+   "x": 103,
+   "y": 396,
+   "type": "DEPOT"
+  },
+  {
+   "id": 20,
+   "name": "Canal Street",
+   "x": 231,
+   "y": 380,
+   "type": "AREA"
+  },
+  {
+   "id": 21,
+   "name": "Temple Road",
+   "x": 387,
+   "y": 371,
+   "type": "AREA"
+  },
+  {
+   "id": 22,
+   "name": "Riverside Drive",
+   "x": 544,
+   "y": 398,
+   "type": "HOSPITAL"
+  },
+  {
+   "id": 23,
+   "name": "Mill Street",
+   "x": 667,
+   "y": 363,
+   "type": "AREA"
+  },
+  {
+   "id": 24,
+   "name": "Garden Avenue",
+   "x": 816,
+   "y": 385,
+   "type": "AREA"
+  },
+  {
+   "id": 25,
+   "name": "Greenfield",
+   "x": 97,
+   "y": 489,
+   "type": "HOSPITAL"
+  },
+  {
+   "id": 26,
+   "name": "Bus Stand",
+   "x": 218,
+   "y": 487,
+   "type": "AREA"
+  },
+  {
+   "id": 27,
+   "name": "South Depot Road",
+   "x": 395,
+   "y": 497,
+   "type": "DEPOT"
+  },
+  {
+   "id": 28,
+   "name": "Fort Road",
+   "x": 534,
+   "y": 469,
+   "type": "AREA"
+  },
+  {
+   "id": 29,
+   "name": "Southside Cross",
+   "x": 675,
+   "y": 494,
+   "type": "HOSPITAL"
+  },
+  {
+   "id": 30,
+   "name": "Airport Road",
+   "x": 831,
+   "y": 493,
+   "type": "AREA"
+  }
+ ],
+ "roads": [
+  {
+   "from_node": 1,
+   "to_node": 7,
+   "weight": 4
+  },
+  {
+   "from_node": 2,
+   "to_node": 8,
+   "weight": 3
+  },
+  {
+   "from_node": 2,
+   "to_node": 9,
+   "weight": 6
+  },
+  {
+   "from_node": 3,
+   "to_node": 4,
+   "weight": 4
+  },
+  {
+   "from_node": 3,
+   "to_node": 10,
+   "weight": 6
+  },
+  {
+   "from_node": 4,
+   "to_node": 5,
+   "weight": 6
+  },
+  {
+   "from_node": 4,
+   "to_node": 10,
+   "weight": 2
+  },
+  {
+   "from_node": 4,
+   "to_node": 11,
+   "weight": 6
+  },
+  {
+   "from_node": 5,
+   "to_node": 6,
+   "weight": 6
+  },
+  {
+   "from_node": 5,
+   "to_node": 11,
+   "weight": 3
+  },
+  {
+   "from_node": 7,
+   "to_node": 13,
+   "weight": 3
+  },
+  {
+   "from_node": 8,
+   "to_node": 9,
+   "weight": 6
+  },
+  {
+   "from_node": 8,
+   "to_node": 14,
+   "weight": 4
+  },
+  {
+   "from_node": 9,
+   "to_node": 10,
+   "weight": 4
+  },
+  {
+   "from_node": 9,
+   "to_node": 15,
+   "weight": 3
+  },
+  {
+   "from_node": 10,
+   "to_node": 11,
+   "weight": 5
+  },
+  {
+   "from_node": 10,
+   "to_node": 16,
+   "weight": 3
+  },
+  {
+   "from_node": 11,
+   "to_node": 17,
+   "weight": 3
+  },
+  {
+   "from_node": 11,
+   "to_node": 18,
+   "weight": 6
+  },
+  {
+   "from_node": 12,
+   "to_node": 18,
+   "weight": 3
+  },
+  {
+   "from_node": 13,
+   "to_node": 14,
+   "weight": 3
+  },
+  {
+   "from_node": 13,
+   "to_node": 20,
+   "weight": 6
+  },
+  {
+   "from_node": 14,
+   "to_node": 15,
+   "weight": 4
+  },
+  {
+   "from_node": 14,
+   "to_node": 20,
+   "weight": 3
+  },
+  {
+   "from_node": 15,
+   "to_node": 16,
+   "weight": 4
+  },
+  {
+   "from_node": 15,
+   "to_node": 21,
+   "weight": 2
+  },
+  {
+   "from_node": 16,
+   "to_node": 17,
+   "weight": 4
+  },
+  {
+   "from_node": 16,
+   "to_node": 23,
+   "weight": 6
+  },
+  {
+   "from_node": 17,
+   "to_node": 18,
+   "weight": 3
+  },
+  {
+   "from_node": 17,
+   "to_node": 23,
+   "weight": 3
+  },
+  {
+   "from_node": 18,
+   "to_node": 24,
+   "weight": 4
+  },
+  {
+   "from_node": 19,
+   "to_node": 20,
+   "weight": 5
+  },
+  {
+   "from_node": 19,
+   "to_node": 25,
+   "weight": 3
+  },
+  {
+   "from_node": 20,
+   "to_node": 21,
+   "weight": 6
+  },
+  {
+   "from_node": 20,
+   "to_node": 26,
+   "weight": 4
+  },
+  {
+   "from_node": 21,
+   "to_node": 22,
+   "weight": 6
+  },
+  {
+   "from_node": 21,
+   "to_node": 27,
+   "weight": 3
+  },
+  {
+   "from_node": 22,
+   "to_node": 23,
+   "weight": 5
+  },
+  {
+   "from_node": 23,
+   "to_node": 24,
+   "weight": 5
+  },
+  {
+   "from_node": 23,
+   "to_node": 29,
+   "weight": 5
+  },
+  {
+   "from_node": 23,
+   "to_node": 30,
+   "weight": 7
+  },
+  {
+   "from_node": 24,
+   "to_node": 30,
+   "weight": 4
+  },
+  {
+   "from_node": 25,
+   "to_node": 26,
+   "weight": 4
+  },
+  {
+   "from_node": 28,
+   "to_node": 29,
+   "weight": 5
+  },
+  {
+   "from_node": 29,
+   "to_node": 30,
+   "weight": 6
+  }
+ ],
+ "emergency_types": [
+  {
+   "type": "Cardiac Arrest",
+   "severity": 9,
+   "required_specialization": "CARDIAC"
+  },
+  {
+   "type": "Severe Trauma",
+   "severity": 8,
+   "required_specialization": "TRAUMA"
+  },
+  {
+   "type": "Accident",
+   "severity": 8,
+   "required_specialization": "TRAUMA"
+  },
+  {
+   "type": "Stroke",
+   "severity": 8,
+   "required_specialization": "GENERAL"
+  },
+  {
+   "type": "Breathing Difficulty",
+   "severity": 7,
+   "required_specialization": "GENERAL"
+  },
+  {
+   "type": "Severe Bleeding",
+   "severity": 7,
+   "required_specialization": "TRAUMA"
+  },
+  {
+   "type": "Child Emergency",
+   "severity": 6,
+   "required_specialization": "PEDIATRIC"
+  },
+  {
+   "type": "Burns",
+   "severity": 6,
+   "required_specialization": "TRAUMA"
+  },
+  {
+   "type": "Poisoning",
+   "severity": 6,
+   "required_specialization": "GENERAL"
+  },
+  {
+   "type": "High Fever",
+   "severity": 4,
+   "required_specialization": "GENERAL"
+  },
+  {
+   "type": "Fracture",
+   "severity": 4,
+   "required_specialization": "GENERAL"
+  },
+  {
+   "type": "Minor Injury",
+   "severity": 2,
+   "required_specialization": "GENERAL"
+  },
+  {
+   "type": "General Checkup",
+   "severity": 1,
+   "required_specialization": "GENERAL"
+  }
+ ],
+ "hospitals": [
+  {
+   "id": 1,
+   "name": "City General Hospital",
+   "node": 15,
+   "total_beds": 40,
+   "available_beds": 26,
+   "specializations": [
+    "GENERAL",
+    "TRAUMA"
+   ]
+  },
+  {
+   "id": 2,
+   "name": "Metro Cardiac Centre",
+   "node": 10,
+   "total_beds": 20,
+   "available_beds": 11,
+   "specializations": [
+    "CARDIAC"
+   ]
+  },
+  {
+   "id": 3,
+   "name": "St. Mary's Children's Hospital",
+   "node": 8,
+   "total_beds": 24,
+   "available_beds": 15,
+   "specializations": [
+    "PEDIATRIC",
+    "GENERAL"
+   ]
+  },
+  {
+   "id": 4,
+   "name": "Riverside Trauma Centre",
+   "node": 22,
+   "total_beds": 16,
+   "available_beds": 6,
+   "specializations": [
+    "TRAUMA",
+    "CARDIAC"
+   ]
+  },
+  {
+   "id": 5,
+   "name": "Northside Community Hospital",
+   "node": 3,
+   "total_beds": 30,
+   "available_beds": 22,
+   "specializations": [
+    "GENERAL"
+   ]
+  },
+  {
+   "id": 6,
+   "name": "Lakeview Medical Centre",
+   "node": 6,
+   "total_beds": 22,
+   "available_beds": 12,
+   "specializations": [
+    "GENERAL",
+    "CARDIAC"
+   ]
+  },
+  {
+   "id": 7,
+   "name": "Eastgate Emergency Hospital",
+   "node": 18,
+   "total_beds": 18,
+   "available_beds": 4,
+   "specializations": [
+    "TRAUMA",
+    "GENERAL"
+   ]
+  },
+  {
+   "id": 8,
+   "name": "Greenfield Children's Clinic",
+   "node": 25,
+   "total_beds": 10,
+   "available_beds": 3,
+   "specializations": [
+    "PEDIATRIC"
+   ]
+  },
+  {
+   "id": 9,
+   "name": "Southside District Hospital",
+   "node": 29,
+   "total_beds": 28,
+   "available_beds": 17,
+   "specializations": [
+    "GENERAL"
+   ]
+  }
+ ],
+ "ambulances": [
+  {
+   "id": 101,
+   "node": 1,
+   "status": "FREE"
+  },
+  {
+   "id": 102,
+   "node": 12,
+   "status": "FREE"
+  },
+  {
+   "id": 103,
+   "node": 19,
+   "status": "FREE"
+  },
+  {
+   "id": 104,
+   "node": 27,
+   "status": "FREE"
+  },
+  {
+   "id": 105,
+   "node": 1,
+   "status": "FREE"
+  },
+  {
+   "id": 106,
+   "node": 12,
+   "status": "FREE"
+  },
+  {
+   "id": 107,
+   "node": 14,
+   "status": "EN_ROUTE"
+  },
+  {
+   "id": 108,
+   "node": 23,
+   "status": "EN_ROUTE"
+  },
+  {
+   "id": 109,
+   "node": 9,
+   "status": "OCCUPIED"
+  }
+ ],
+ "emergencies": [
+  {
+   "node": 21,
+   "type": "Cardiac Arrest",
+   "reported_at": "2026-01-01 14:01:12"
+  },
+  {
+   "node": 5,
+   "type": "Severe Bleeding",
+   "reported_at": "2026-01-01 14:03:55"
+  },
+  {
+   "node": 26,
+   "type": "Breathing Difficulty",
+   "reported_at": "2026-01-01 14:05:02"
+  },
+  {
+   "node": 13,
+   "type": "Child Emergency",
+   "reported_at": "2026-01-01 14:06:18"
+  },
+  {
+   "node": 30,
+   "type": "Fracture",
+   "reported_at": "2026-01-01 14:07:40"
+  },
+  {
+   "node": 9,
+   "type": "Minor Injury",
+   "reported_at": "2026-01-01 14:09:05"
+  }
+ ],
+ "scenarios": [
+  {
+   "id": 1,
+   "name": "Rush hour",
+   "description": "Eight emergencies reported together across the city; six ambulances are free. Shows ranking, top-5 evaluation and several matches in one cycle.",
+   "emergencies": [
+    {
+     "node": 21,
+     "type": "Cardiac Arrest"
+    },
+    {
+     "node": 16,
+     "type": "Accident"
+    },
+    {
+     "node": 4,
+     "type": "Stroke"
+    },
+    {
+     "node": 28,
+     "type": "Severe Bleeding"
+    },
+    {
+     "node": 2,
+     "type": "Breathing Difficulty"
+    },
+    {
+     "node": 13,
+     "type": "Child Emergency"
+    },
+    {
+     "node": 24,
+     "type": "Burns"
+    },
+    {
+     "node": 30,
+     "type": "Fracture"
+    }
+   ],
+   "hospital_beds": [],
+   "ambulances": [
+    {
+     "id": 101,
+     "node": 1,
+     "status": "FREE"
+    },
+    {
+     "id": 102,
+     "node": 12,
+     "status": "FREE"
+    },
+    {
+     "id": 103,
+     "node": 19,
+     "status": "FREE"
+    },
+    {
+     "id": 104,
+     "node": 27,
+     "status": "FREE"
+    },
+    {
+     "id": 105,
+     "node": 1,
+     "status": "FREE"
+    },
+    {
+     "id": 106,
+     "node": 12,
+     "status": "FREE"
+    },
+    {
+     "id": 107,
+     "node": 14,
+     "status": "EN_ROUTE"
+    },
+    {
+     "id": 108,
+     "node": 23,
+     "status": "EN_ROUTE"
+    },
+    {
+     "id": 109,
+     "node": 9,
+     "status": "OCCUPIED"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "Cardiac capacity exhausted",
+   "description": "All three cardiac-capable hospitals have 0 free beds. The Cardiac Arrest (severity 9) is skipped and the lone free ambulance serves another case.",
+   "emergencies": [
+    {
+     "node": 21,
+     "type": "Cardiac Arrest"
+    },
+    {
+     "node": 11,
+     "type": "Burns"
+    },
+    {
+     "node": 14,
+     "type": "Fracture"
+    }
+   ],
+   "hospital_beds": [
+    {
+     "hospital_id": 2,
+     "available_beds": 0
+    },
+    {
+     "hospital_id": 4,
+     "available_beds": 0
+    },
+    {
+     "hospital_id": 6,
+     "available_beds": 0
+    }
+   ],
+   "ambulances": [
+    {
+     "id": 101,
+     "node": 1,
+     "status": "FREE"
+    },
+    {
+     "id": 102,
+     "node": 12,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 103,
+     "node": 19,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 104,
+     "node": 27,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 105,
+     "node": 1,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 106,
+     "node": 12,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 107,
+     "node": 14,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 108,
+     "node": 23,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 109,
+     "node": 9,
+     "status": "OCCUPIED"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "Distance beats a small severity gap",
+   "description": "One free ambulance. A severity-8 Accident is far away; a severity-7 Breathing Difficulty is very close. The closer case wins.",
+   "emergencies": [
+    {
+     "node": 28,
+     "type": "Accident"
+    },
+    {
+     "node": 21,
+     "type": "Breathing Difficulty"
+    }
+   ],
+   "hospital_beds": [],
+   "ambulances": [
+    {
+     "id": 101,
+     "node": 1,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 102,
+     "node": 12,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 103,
+     "node": 19,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 104,
+     "node": 27,
+     "status": "FREE"
+    },
+    {
+     "id": 105,
+     "node": 1,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 106,
+     "node": 12,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 107,
+     "node": 14,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 108,
+     "node": 23,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 109,
+     "node": 9,
+     "status": "OCCUPIED"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "Severity beats distance",
+   "description": "One free ambulance. A far-away Cardiac Arrest (severity 9) still outranks a Fracture right next to the ambulance.",
+   "emergencies": [
+    {
+     "node": 7,
+     "type": "Fracture"
+    },
+    {
+     "node": 28,
+     "type": "Cardiac Arrest"
+    }
+   ],
+   "hospital_beds": [],
+   "ambulances": [
+    {
+     "id": 101,
+     "node": 1,
+     "status": "FREE"
+    },
+    {
+     "id": 102,
+     "node": 12,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 103,
+     "node": 19,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 104,
+     "node": 27,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 105,
+     "node": 1,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 106,
+     "node": 12,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 107,
+     "node": 14,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 108,
+     "node": 23,
+     "status": "OCCUPIED"
+    },
+    {
+     "id": 109,
+     "node": 9,
+     "status": "OCCUPIED"
+    }
+   ]
+  }
+ ]
+}
