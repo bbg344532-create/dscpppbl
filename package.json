@@ -1,0 +1,15 @@
+{
+  "name": "medroute-backend",
+  "version": "1.0.0",
+  "description": "MedRoute backend: REST API that keeps the data in SQLite and asks the C++ engine to make every dispatch decision",
+  "main": "server.js",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/api.test.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "sql.js": "^1.10.3"
+  }
+}
