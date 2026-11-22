@@ -1,0 +1,12 @@
+{
+  "name": "medroute-backend",
+  "version": "0.1.0",
+  "description": "Backend API for MedRoute - Emergency Hospital Routing System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

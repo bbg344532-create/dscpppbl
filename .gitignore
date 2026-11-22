@@ -1,2 +1,16 @@
+# C++
+*.o
+*.exe
+build/
+
+# Node
 node_modules/
-data/
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/

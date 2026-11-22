@@ -1,0 +1,46 @@
+/* MedRoute design tokens: light, calm palette and a soft humanist typeface.
+   Chosen for a medical setting: low-contrast-fatigue backgrounds, muted
+   (not neon) status colors, and no technical/monospace styling. */
+:root {
+  --bg: #F3F8FA;
+  --panel: #FFFFFF;
+  --panel-raised: #F0F5F8;
+  --hairline: #D9E4EA;
+  --edge: #B7C6D2;
+
+  --text-primary: #1F2D3A;
+  --text-secondary: #4A5D70;
+  --text-faint: #66788A;
+
+  --accent: #1B7F8C;
+  --accent-strong: #12636E;
+  --accent-dim: #E1F2F3;
+
+  /* Triage bands, softened for a light background */
+  --sev-critical: #CF3F4B;
+  --sev-urgent: #C4651A;
+  --sev-moderate: #A97F00;
+  --sev-minor: #2E8B5E;
+
+  --status-free: #1E9E8F;
+  --status-enroute: #3F6FD8;
+  --status-occupied: #8795A3;
+
+  /* One calm family everywhere; numbers stay aligned via tabular-nums */
+  --font-display: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  color-scheme: light;
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

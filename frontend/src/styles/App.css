@@ -1,0 +1,649 @@
+/* ===== Layout shell ===== */
+
+.app-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--panel);
+}
+
+.app-title-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.app-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.app-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.app-subtitle {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.app-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(0, 201, 183, 0.6);
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 201, 183, 0.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(0, 201, 183, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 201, 183, 0); }
+}
+
+main {
+  flex: 1;
+  padding: 20px 28px 28px;
+}
+
+/* ===== Dashboard grid ===== */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr 320px;
+  gap: 18px;
+  align-items: start;
+}
+
+.col-left, .col-right, .col-center {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+@media (max-width: 1100px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Panel ===== */
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.panel-header h2 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.panel-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.empty-state {
+  color: var(--text-faint);
+  font-size: 13px;
+  margin: 8px 0 4px;
+}
+
+/* ===== Emergency queue ===== */
+
+.queue-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.queue-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 10px 12px;
+  background: var(--panel-raised);
+  border-left: 3px solid var(--band-color);
+  border-radius: 4px;
+}
+
+.queue-rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.queue-severity {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--band-color);
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.queue-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.queue-type {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.queue-band {
+  color: var(--band-color);
+  font-weight: 600;
+}
+
+.queue-meta {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 2px;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.queue-item .btn-ghost {
+  flex-shrink: 0;
+}
+
+.btn-ghost {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid var(--hairline);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ===== Ambulance / status list ===== */
+
+.status-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--panel-raised);
+  border-radius: 4px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-id {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-primary);
+  width: 68px;
+  flex-shrink: 0;
+}
+
+.status-loc {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-faint);
+  flex: 1;
+}
+
+.status-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ===== Hospitals ===== */
+
+.hospital-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hospital-item {
+  background: var(--panel-raised);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+.hospital-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.hospital-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.hospital-beds {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.hospital-bar-track {
+  height: 4px;
+  background: var(--hairline);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.hospital-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.hospital-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.spec-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-secondary);
+  border: 1px solid var(--hairline);
+  border-radius: 3px;
+  padding: 2px 6px;
+}
+
+/* ===== Report emergency form ===== */
+
+.report-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.field select {
+  background: var(--panel-raised);
+  border: 1px solid var(--hairline);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+.field select:focus-visible {
+  border-color: var(--accent);
+}
+
+.resolved-preview {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--panel-raised);
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #06201C;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 9px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-small {
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+/* ===== Dispatch action bar ===== */
+
+.dispatch-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 12px 16px;
+}
+
+.dispatch-action-hint {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ===== Dispatcher reasoning ===== */
+
+.reasoning-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-height: 160px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+
+.reasoning-line {
+  padding: 4px 8px;
+  border-radius: 3px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+.reasoning-skip {
+  color: var(--text-faint);
+}
+
+.reasoning-win {
+  color: var(--accent);
+  background: var(--accent-dim);
+  font-weight: 600;
+}
+
+/* ===== Map ===== */
+
+.map-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-svg {
+  width: 100%;
+  height: auto;
+  background: var(--bg);
+  border-radius: 4px;
+  border: 1px solid var(--hairline);
+}
+
+.map-edge {
+  stroke: var(--hairline);
+  stroke-width: 1.5;
+}
+
+.map-edge-highlight {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.map-node {
+  fill: var(--text-faint);
+}
+
+.map-node-label {
+  fill: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.map-hospital-circle {
+  fill: var(--panel-raised);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.map-hospital-cross {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.map-legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 10px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.map-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-swatch {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.legend-hospital {
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  background: var(--panel-raised);
+}
+
+.legend-ambulance {
+  background: var(--status-free);
+  border-radius: 3px;
+}
+
+.legend-emergency {
+  border: 2px solid var(--sev-urgent);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.legend-route {
+  background: var(--accent);
+  height: 3px;
+  border-radius: 2px;
+  align-self: center;
+}
+
+/* ===== Dispatch log ===== */
+
+.log-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.log-line {
+  display: flex;
+  gap: 10px;
+  padding: 6px 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.log-line:hover {
+  background: var(--panel-raised);
+}
+
+.log-time {
+  color: var(--text-faint);
+  flex-shrink: 0;
+}
+
+.log-text {
+  color: var(--text-secondary);
+}
+
+.log-dist {
+  color: var(--text-faint);
+}
+
+/* ===== Light, calm theme refinements ===== */
+.panel { border-radius: 10px; box-shadow: 0 1px 3px rgba(31, 45, 58, 0.07); }
+.app-header { box-shadow: 0 1px 3px rgba(31, 45, 58, 0.06); }
+.map-edge { stroke: var(--edge); }
+.btn-primary { color: #FFFFFF; }
+.btn-ghost:hover { background: var(--accent-dim); }
+.reasoning-win { color: var(--accent-strong); }
+.queue-item, .status-item, .hospital-item { border-radius: 6px; }
+.live-dot { animation: pulse 3.2s ease-out infinite; }
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(27, 127, 140, 0.4); }
+  70%  { box-shadow: 0 0 0 7px rgba(27, 127, 140, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(27, 127, 140, 0); }
+}
+
+/* ===== Backend-connected dashboard ===== */
+.live-dot.live-offline { background: var(--sev-critical); animation: none; box-shadow: none; }
+.live-dot.live-noengine { background: var(--sev-urgent); animation: none; box-shadow: none; }
+.live-dot.live-checking { background: var(--text-faint); animation: none; box-shadow: none; }
+
+.loading { padding: 40px; text-align: center; color: var(--text-secondary); }
+.error-panel { max-width: 560px; margin: 40px auto; }
+.error-panel h2 { margin-top: 0; font-family: var(--font-display); }
+.error-panel code { background: var(--panel-raised); padding: 1px 6px; border-radius: 4px; }
+
+.banner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; margin-bottom: 14px; border-radius: 8px; font-size: 13.5px; }
+.banner-error { background: #FBE9EB; border: 1px solid var(--sev-critical); color: #8C2430; }
+.banner-warn { background: #FFF3E3; border: 1px solid var(--sev-urgent); color: #8A4A10; }
+
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.button-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.scenario-description { font-size: 12.5px; color: var(--text-secondary); margin: 4px 0 10px; }
+
+.status-item-tall { flex-direction: column; align-items: stretch; gap: 4px; }
+.status-row { display: flex; align-items: center; gap: 10px; }
+.trip-line { font-size: 11.5px; color: var(--text-secondary); padding-left: 18px; }
+
+.hospital-bottom-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+.hospital-bottom-row .hospital-tags { margin-top: 0; }
+
+.map-edge-trip { stroke: var(--accent); stroke-width: 2; opacity: 0.55; }
+.map-edge-jam { stroke: var(--sev-urgent); stroke-width: 3.5; }
+.map-edge-selected { stroke-dasharray: 5 4; stroke-width: 3.5; stroke: var(--text-primary); }
+.map-edge-hit { stroke: transparent; stroke-width: 14; cursor: pointer; }
+.map-depot { fill: var(--panel-raised); stroke: var(--text-secondary); stroke-width: 1.5; }
+.legend-depot { border: 1.5px solid var(--text-secondary); background: var(--panel-raised); transform: rotate(45deg) scale(0.8); }
+.legend-jam { background: var(--sev-urgent); height: 3px; border-radius: 2px; align-self: center; }
+.map-legend { flex-wrap: wrap; row-gap: 6px; }
+
+.traffic-form { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
+.traffic-road { flex: 1 1 220px; }
+.traffic-cost { width: 90px; }
+.traffic-cost input { background: var(--panel-raised); border: 1px solid var(--hairline); color: var(--text-primary); font-family: var(--font-body); font-size: 13px; padding: 8px 10px; border-radius: 4px; width: 100%; }
+.jam-list { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.jam-list li { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12.5px; background: var(--panel-raised); padding: 6px 10px; border-radius: 6px; }
+
+.reasoning-log { color: var(--text-faint); }
+.reasoning-feed { max-height: 220px; }
+
+/* ===== Refinements after the first browser review ===== */
+.map-edge-highlight { stroke: var(--accent-strong); stroke-width: 4.5; }
+.map-edge-selected { stroke-dasharray: 5 4; stroke-width: 3.5; }
+.map-edge:not(.map-edge-jam):not(.map-edge-highlight).map-edge-selected { stroke: var(--text-primary); }
+.status-row { flex-wrap: wrap; row-gap: 4px; }
+.status-loc, .status-tag { white-space: nowrap; }
+.reasoning-feed { max-height: 260px; }
+.reasoning-details { margin-top: 6px; }
+.reasoning-details summary { cursor: pointer; font-size: 12px; color: var(--text-secondary); padding: 4px 8px; }
+.reasoning-details[open] summary { margin-bottom: 4px; }
+
+.status-row { flex-wrap: nowrap; }
+.status-loc { flex: 1; }
+.status-second { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.status-second .trip-line { padding-left: 18px; flex: 1; }
+.status-second .btn-small { flex-shrink: 0; }

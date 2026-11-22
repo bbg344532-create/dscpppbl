@@ -1,99 +1,125 @@
-# MedRoute backend
+# MedRoute — Emergency Hospital Routing & Resource Optimization System
 
-A REST API that keeps all data in a SQLite file and asks the C++ engine to make every dispatch decision.
+**Team ID:** DSCPP-III-2026-T195
+**Mentor:** Ms. Meenakshi Maindola
+**Semester:** 3rd | **Section:** C, D, I, K
 
-```
-Frontend  ->  this backend (Express)  ->  medroute_service (the C++ engine)
-                      |
-                 SQLite file (backend/data/medroute.sqlite)
-```
-
-For every request that changes anything, the backend loads the current state from the database, runs the engine
-once with that state and one action, and saves what the engine decided, all as one all-or-nothing change.
-If the engine reports an error, nothing is saved. Requests that change data run one at a time.
-
-## Set up (needs Node.js 18 or newer)
-
-1. **Build the engine program** (from the `core-engine` folder; this produces `medroute_service`, or `medroute_service.exe` on Windows):
-
-```
-g++ -std=c++11 -Isrc service/service_main.cpp src/Graph.cpp src/PriorityQueue.cpp src/LinkedList.cpp src/Ambulance.cpp src/Hospital.cpp src/Emergency.cpp src/Dijkstra.cpp src/HopCountPlanner.cpp src/SeverityTable.cpp src/Dispatcher.cpp -o medroute_service
-```
-
-2. **Install and start** (from the `backend` folder):
-
-```
-npm install
-npm start
-```
-
-It prints `MedRoute backend listening on port 5000`. The first start creates `backend/data/medroute.sqlite` from
-`database/schema.sql` and `database/seed_data.sql`. Delete that file (or call `POST /api/reset`) to start over.
-
-| Setting (environment variable) | Default |
-|---|---|
-| `PORT` | 5000 |
-| `MEDROUTE_DB` | `backend/data/medroute.sqlite` |
-| `MEDROUTE_ENGINE_PATH` | `core-engine/medroute_service` (`.exe` on Windows) |
-
-## Endpoints
-
-Reading:
-
-| Request | Returns |
-|---|---|
-| `GET /api/health` | `{ok, database, engine}`; `engine` is false if the engine program was not found |
-| `GET /api/state` | Everything: nodes, roads (current and base cost), emergency types, hospitals, ambulances, waiting emergencies (most urgent first), trips in progress, recent history, scenarios |
-| `GET /api/history?limit=50` | Dispatch history, newest first |
-| `GET /api/scenarios` | The ready-made demo scenarios |
-
-Changing (each returns the engine's `log`, `trace` (its reasoning), `dispatches`, `completed`, `reroutes`, and the new `state`):
-
-| Request | Body | What happens |
+## Team Members
+| Name | Roll No. | Role |
 |---|---|---|
-| `POST /api/emergencies` | `{"node": 11, "type": "Burns"}` | Reports an emergency (status 201, with `emergencyId`), then matches |
-| `POST /api/dispatch/run` | none | Matches free ambulances to waiting emergencies |
-| `POST /api/trips/:ambulanceId/complete` | none | The ambulance finished its trip; frees it and matches again |
-| `POST /api/hospitals/:id/discharge` | none | Frees one bed and matches again |
-| `POST /api/traffic` | `{"from": 3, "to": 4, "cost": 12}` | Sets a road's cost and re-plans trips in progress. Send the road's `baseCost` to clear the jam |
-| `POST /api/scenarios/:id/load` | none | Resets the data and applies a demo scenario |
-| `POST /api/reset` | none | Resets to the default starting data |
+| Rashi Kamboj | 2028027 | Team Lead / Backend & Integration |
+| Daksh Kandari | 2027732 | Developer / Core DS-Algorithm Engine (C++) |
+| Tanishka Joshi | 2029091 | Frontend & UI/UX |
+| Aakarsh Gupta | 2027501 | Database & Documentation |
 
-Errors look like `{"ok": false, "error": {"type": "...", "message": "..."}}`:
+---
 
-| Status | Meaning |
+## Problem Statement
+
+During a medical emergency, every minute matters — but the current process for getting help is largely manual and inefficient. Callers often don't know which nearby hospital can treat a specific emergency, ambulance dispatch is rarely based on true proximity/availability, and routes ignore real-time traffic conditions. **MedRoute** is a prototype system that prioritizes incoming emergencies by severity, matches each one to the nearest available and suitable ambulance, computes optimal traffic-aware routes, and selects the best hospital based on specialization and bed availability.
+
+## Key Features
+- Structured emergency intake (location + type) with automatic severity/specialization resolution
+- Severity-based prioritization — most critical emergency served first, not first-come-first-served
+- Feasibility-aware ambulance/hospital matching — skips emergencies with no currently available hospital rather than blocking the ambulance
+- Combined severity + distance scoring — a nearby, moderately urgent case can be served before a far-away top-priority one
+- Hospital load balancing across equally-suitable hospitals
+- Dynamic re-routing support and full dispatch history logging
+
+## Data Structures & Algorithms Used
+| Feature | Data Structure / Algorithm |
 |---|---|
-| 400 | Bad input (`BadRequest`, `UnknownLocationError`, `UnknownEmergencyType`, `UnknownRoadError`) |
-| 404 | Unknown ID or route (`UnknownIdError`, `UnknownScenario`, `NotFound`) |
-| 409 | Conflict (`NotEnRoute`, `DuplicateIdError`) |
-| 503 | Engine program not found or could not start (`EngineUnavailable`); reading still works |
-| 500/504 | Unexpected error / engine timed out |
+| Emergency severity prioritization | Priority Queue (Max-Heap) |
+| Ambulance/hospital/severity lookup | Hash Table (generic, templated on key + value type) |
+| Road network representation | Graph (weighted adjacency list) |
+| Route & distance computation | Dijkstra's Algorithm |
+| Dispatch history & waitlist | Linked List |
 
-## Try it (Windows Command Prompt, using curl)
+## Tech Stack
+- **Core Engine:** C++ (Graph, Priority Queue/Heap, Hash Table, Linked List, Dijkstra, Dispatcher)
+- **Frontend:** React (Vite) — interactive dashboard, not yet wired to backend/DB
+- **Backend:** Node.js (Express) / Python (FastAPI) — scaffolded, integration pending
+- **Database:** MySQL / PostgreSQL — schema + seed data ready
+- **Maps/Routing (future):** Google Maps API / OpenStreetMap + Leaflet.js
+- **Real-time (future):** WebSockets (Socket.io)
 
+## Repository Structure
 ```
-curl http://localhost:5000/api/health
-curl -X POST http://localhost:5000/api/dispatch/run
-curl -X POST -H "Content-Type: application/json" -d "{\"node\":11,\"type\":\"Burns\"}" http://localhost:5000/api/emergencies
-curl -X POST http://localhost:5000/api/scenarios/2/load
+medroute/
+├── core-engine/              # C++ DS/algorithm engine — 100% complete
+│   ├── src/
+│   │   ├── main.cpp          # demo: 3 scenarios proving the design works
+│   │   ├── Graph.h/.cpp
+│   │   ├── PriorityQueue.h/.cpp
+│   │   ├── HashTable.h/.cpp
+│   │   ├── LinkedList.h/.cpp
+│   │   ├── Dijkstra.h/.cpp
+│   │   ├── SeverityTable.h/.cpp
+│   │   ├── Dispatcher.h/.cpp  # core matching/decision logic
+│   │   ├── Ambulance.h/.cpp
+│   │   ├── Hospital.h/.cpp
+│   │   └── Emergency.h/.cpp
+│   └── CMakeLists.txt
+├── backend/                  # API layer — scaffolded, not yet integrated
+│   ├── routes/
+│   └── controllers/
+├── frontend/                 # React (Vite) interactive dashboard
+│   └── src/
+│       ├── components/       # Dashboard, EmergencyList, AmbulanceStatus,
+│       │                     # HospitalList, MapView, ReportEmergencyForm,
+│       │                     # DispatchReasoning
+│       ├── engine/           # graph.js, dijkstra.js, severityTable.js,
+│       │                     # dispatcher.js — JS port of the core engine's
+│       │                     # matching logic, so the dashboard runs the
+│       │                     # real algorithm client-side
+│       ├── data/             # mockData.js — mirrors database/seed_data.sql
+│       └── styles/
+├── database/                 # Schema + seed data — ready
+│   ├── schema.sql
+│   └── seed_data.sql
+├── docs/                     # Proposal, diagrams, presentations
+└── README.md
 ```
 
-## Database notes
+## Project Status
 
-- Emergencies have a status: `WAITING` (in the queue), `DISPATCHED` (a trip is in progress), `COMPLETED`.
-- A trip in progress is a `dispatch_history` row with `completed_at` empty. It stores the route and cost.
-- `roads.weight` is the current cost; `roads.base_weight` is the normal cost.
-- The schema file is written in MySQL style. The backend converts `AUTO_INCREMENT` for SQLite when it loads it. It has been run on SQLite only.
-- `sql.js` is SQLite compiled to WebAssembly, so there is nothing native to build. It keeps the database in memory and writes the whole file after each change, which is fine for a prototype of this size.
-- CORS is open to any origin, which suits a local prototype and should be tightened for anything public.
+**Phase-II: Core engine 100% complete, database ready, frontend interactive demo ready**
 
-## Tests
+- **Core engine** — fully implemented and verified: compiles with zero warnings (`-Wall -Wextra -Wpedantic`), zero memory errors/leaks under AddressSanitizer, demonstrated through 3 working scenarios (full pipeline, feasibility-skip, distance-vs-severity tradeoff)
+- **Database** — schema and seed data written and verified against a live SQLite test run
+- **Frontend** — interactive React dashboard: structured emergency intake form, a "Run Dispatch Cycle" action that runs the real matching algorithm (ported to JS, using a real Dijkstra over the same weighted graph as the C++ engine), a live reasoning panel showing the algorithm's actual decisions, and route highlighting on a schematic network map. **Not yet connected to the backend/database** — this is intentional per mentor guidance for this phase.
+- **Backend integration** — not started; deferred to Phase-III
 
+## How to Run
+
+### Core engine (C++)
+```bash
+cd core-engine/src
+g++ -std=c++17 -Wall -Wextra main.cpp Graph.cpp PriorityQueue.cpp LinkedList.cpp \
+    Ambulance.cpp Hospital.cpp Emergency.cpp Dijkstra.cpp SeverityTable.cpp Dispatcher.cpp \
+    -o medroute_engine
+./medroute_engine
 ```
-npm test
+Or via CMake:
+```bash
+cd core-engine
+mkdir build && cd build
+cmake ..
+make
+./medroute_engine
 ```
 
-12 end-to-end tests start the real server with a temporary database and the real engine: every endpoint, error
-cases (nothing changes on an error), two reports at the same instant, a restart that keeps the data, a missing engine, the demo
-scenarios, and a 50-action random session that checks after every step that beds stay within capacity, no ambulance has two trips,
-and no dispatched emergency is also waiting. If the engine is not at the default path, set `MEDROUTE_ENGINE_PATH` first.
+### Frontend (React/Vite)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Open the printed localhost URL. Use the "Report emergency" form to add a new case, then click "Run dispatch cycle" to watch the Dispatcher's real reasoning and the resulting route appear on the map.
+
+### Database
+```bash
+mysql -u root -p < database/schema.sql
+mysql -u root -p < database/seed_data.sql
+```
+(or load both files into any MySQL/PostgreSQL-compatible client)
