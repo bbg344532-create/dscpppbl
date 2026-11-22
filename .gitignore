@@ -1,16 +1,10 @@
-# C++
-*.o
-*.exe
-build/
-
-# Node
+# Build output and local data
 node_modules/
+dist/
+backend/data/
 .env
-
-# Python
-__pycache__/
-*.pyc
-
-# IDE
-.vscode/
-.idea/
+*.exe
+core-engine/medroute_engine
+core-engine/medroute_tests
+core-engine/medroute_service
+core-engine/build/
